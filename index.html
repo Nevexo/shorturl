@@ -1,0 +1,67 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <style>
+  h1, p, h2, h3, h4, a, label {
+    font-family: 'Open Sans', sans-serif;
+  }
+  </style>
+</head>
+<body>
+  <center>
+    <h1>ShortURL Admin Control Panel</h1>
+    <p>Welcome, here you can see all shortURLs and make new ones.</p>
+    <p>Your token was provided to you the first time you started the server, if you don't know it, look at your config file, if you're running in docker and cannot get into config.json, restart the Docker instance with port 3004 open and visit it.</p>
+    <b><label id='statMSG'>Status: Ready</label></b>
+    <hr><form>
+      <h2><u>Create New URL</u></h2>
+      <p>Short URL name (Leave blank for random string.)</p>
+      <input type='text' id='short'>
+      <p>Full length URL</p>
+      <input type='text' id='full'>
+      <p>Admin token</p>
+      <input type='password' id='token'></br>
+      <input type='submit' onclick="window.location = '/admin/newURL?short=' + short.value + '&full=' + full.value + '&token=' + token.value; return false;"></button>
+    </form><br>
+    <form>
+      <h2><u>Set new token</u></h2>
+      <p>Current Token</p>
+      <input type="password" id='token'></input>
+      <p>New Token <b>(Leave blank for random (RECOMMENDED FOR SECURITY))</b></p>
+      <input type="password" id='newToken'></input></br>
+      <input type="submit" onclick="window.location = '/admin/newToken?newToken=' + newToken.value + '&token=' + token.value; return false;"></input>
+    </form>
+    <form>
+      <h2><u>View all shortURLS</u></h2>
+      <p>Token</p>
+      <input type='password' id='token'></input><br>
+      <input type='submit' onclick="window.location = '/admin/viewURLs?token=' + token.value; return false;"></input>
+    </form>
+</body>
+<script>
+  var parseQueryString = function() {
+
+    var str = window.location.search;
+    var objURL = {};
+
+    str.replace(
+        new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+        function( $0, $1, $2, $3 ){
+            objURL[ $1 ] = $3;
+        }
+    );
+    return objURL;
+};
+  var params = parseQueryString();
+  if (params['status'] == "NEWURL") {
+    document.getElementById('statMSG').innerHTML = 'Status: New URL Created: <a href="/' + params['url'] + '">' + params['url'] + '</a>'
+  }
+  if (params['status'] == 'INVALIDTOKEN') {
+    document.getElementById('statMSG').innerHTML = '<font color="red">Status: Invalid admin token, set a new one below.</font>'
+  }
+  if (params['status'] == 'NEWRANDOMTOKEN') {
+    document.getElementById('statMSG').innerHTML = 'Status: Token updated to: ' + params['token']
+  }
+  if (params['status'] == 'TOKENSET') {
+    document.getElementById('statMSG').innerHTML = 'Status: Token applied!'
+  }
+</script>

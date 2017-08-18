@@ -1,0 +1,27 @@
+{
+  "name": "shorturl",
+  "version": "1.0.0",
+  "description": "A shortURL server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/nevexo/shorturl"
+  },
+  "keywords": [
+    "shorturl",
+    "servers",
+    "express-app",
+    "web"
+  ],
+  "author": "NevexoResearch",
+  "license": "ISC",
+  "dependencies" :
+  {
+    "express" : ">0.0.1",
+    "randomstring" : ">0"
+  }
+}

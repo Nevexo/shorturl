@@ -1,0 +1,1 @@
+{"adminToken":"UNSET","spinupDockerResetServer":true,"_comment":"Disable the above option if you are NOT running this application inside of docker, it exposes the token","dockerResetPort":3004,"token":"sAdscuyQc2fqTeh4BQwYvG8zOS2u6F"}
